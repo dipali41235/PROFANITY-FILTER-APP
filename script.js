@@ -40,6 +40,7 @@ function showError(message) {
   }, 5000);
 }
 
+// Main analysis function
 checkBtn.addEventListener("click", async () => {
   const text = textInput.value.trim();
   if (!text) {
@@ -52,22 +53,44 @@ checkBtn.addEventListener("click", async () => {
   errorMessage.innerHTML = '';
 
   try {
-    // Try API first (you'll need to add a real API key)
-    // For now, we'll use the client-side filter
-    
     // Simulate API delay for better UX
     await new Promise(resolve => setTimeout(resolve, 1000));
     
-    const data = clientSideProfanityFilter(text);
+    const data = advancedProfanityFilter(text);
 
+    // Update main results
     originalEl.textContent = data.original;
-    censoredEl.textContent = data.censored;
+    censoredEl.innerHTML = data.censored;
     
-    const statusBadge = data.has_profanity 
-      ? '<span class="status-badge flagged">Profanity Detected</span>'
-      : '<span class="status-badge clean">Clean Text</span>';
+    // Update statistics
+    cleanWords.textContent = data.statistics.clean_words;
+    flaggedWords.textContent = data.statistics.flagged_words;
+    severityScore.textContent = data.statistics.severity_score;
+    
+    // Update status badge
+    let statusBadge;
+    if (!data.has_profanity) {
+      statusBadge = '<span class="status-badge clean">✅ Clean Text</span>';
+    } else if (data.statistics.severity_score < 30) {
+      statusBadge = '<span class="status-badge warning">⚠️ Mild Issues</span>';
+    } else {
+      statusBadge = '<span class="status-badge flagged">🚫 Profanity Detected</span>';
+    }
     hasProfanityEl.innerHTML = statusBadge;
-
+    
+    // Show detected words if any
+    if (data.detected_words.length > 0) {
+      detectedWordsResult.style.display = 'block';
+      detectedWordsList.innerHTML = data.detected_words
+        .map(word => `<span class="detected-word-tag">${word}</span>`)
+        .join('');
+    } else {
+      detectedWordsResult.style.display = 'none';
+    }
+    
+    // Save to history
+    saveToHistory(data);
+    
     outputCard.classList.add("show");
   } catch (err) {
     showError("Analysis failed. Please try again.");
@@ -77,26 +100,82 @@ checkBtn.addEventListener("click", async () => {
   }
 });
 
-copyBtn.addEventListener("click", async () => {
+// Copy filtered text
+copyBtn.addEventListener("click", () => {
   const text = censoredEl.textContent;
-  try {
-    await navigator.clipboard.writeText(text);
-    
-    // Temporary success feedback
-    const originalText = copyBtn.textContent;
-    copyBtn.textContent = "✅ Copied!";
-    copyBtn.style.background = "linear-gradient(135deg, #48bb78, #38a169)";
-    
-    setTimeout(() => {
-      copyBtn.textContent = originalText;
-      copyBtn.style.background = "";
-    }, 2000);
-  } catch (err) {
-    showError("Failed to copy text. Please try manually selecting and copying.");
+  copyToClipboard(text, "✅ Filtered text copied to clipboard!");
+});
+
+// Copy original text
+copyOriginalBtn.addEventListener("click", () => {
+  const text = originalEl.textContent;
+  copyToClipboard(text, "✅ Original text copied to clipboard!");
+});
+
+// Clear input
+clearBtn.addEventListener("click", () => {
+  textInput.value = '';
+  updateCounts();
+  outputCard.classList.remove("show");
+});
+
+// Load sample text
+sampleBtn.addEventListener("click", () => {
+  const randomSample = sampleTexts[Math.floor(Math.random() * sampleTexts.length)];
+  textInput.value = randomSample;
+  updateCounts();
+});
+
+// Share results
+shareBtn.addEventListener("click", async () => {
+  if (!censoredEl.textContent || censoredEl.textContent === '—') {
+    showError("No results to share. Please analyze some text first.");
+    return;
+  }
+  
+  const shareText = `Profanity Filter Results:\n\nFiltered Text: ${censoredEl.textContent}\n\nClean Words: ${cleanWords.textContent} | Flagged Words: ${flaggedWords.textContent} | Risk Score: ${severityScore.textContent}`;
+  
+  if (navigator.share) {
+    try {
+      await navigator.share({
+        title: 'Profanity Filter Results',
+        text: shareText
+      });
+    } catch (err) {
+      if (err.name !== 'AbortError') {
+        copyToClipboard(shareText, "✅ Results copied to clipboard for sharing!");
+      }
+    }
+  } else {
+    copyToClipboard(shareText, "✅ Results copied to clipboard for sharing!");
   }
 });
 
-// Enter key support
+// Show/hide history
+showHistoryBtn.addEventListener("click", () => {
+  if (historyCard.style.display === 'none') {
+    historyCard.style.display = 'block';
+    updateHistoryDisplay();
+    showHistoryBtn.textContent = '📊 Hide History';
+  } else {
+    historyCard.style.display = 'none';
+    showHistoryBtn.textContent = '📊 Show History';
+  }
+});
+
+// Clear history
+clearHistoryBtn.addEventListener("click", () => {
+  if (confirm('Are you sure you want to clear all analysis history?')) {
+    analysisHistory = [];
+    localStorage.removeItem('profanityFilterHistory');
+    updateHistoryDisplay();
+    showSuccess("✅ Analysis history cleared!");
+  }
+});
+
+// Text input events
+textInput.addEventListener("input", updateCounts);
+
 textInput.addEventListener("keydown", (e) => {
   if (e.key === "Enter" && e.ctrlKey) {
     checkBtn.click();
@@ -107,4 +186,40 @@ textInput.addEventListener("keydown", (e) => {
 textInput.addEventListener("input", function() {
   this.style.height = "auto";
   this.style.height = (this.scrollHeight) + "px";
+});
+
+// Settings change handlers
+sensitivitySelect.addEventListener("change", () => {
+  if (originalEl.textContent && originalEl.textContent !== '—') {
+    checkBtn.click(); // Re-analyze with new settings
+  }
+});
+
+replacementSelect.addEventListener("change", () => {
+  if (originalEl.textContent && originalEl.textContent !== '—') {
+    checkBtn.click(); // Re-analyze with new settings
+  }
+});
+
+preserveLengthCheck.addEventListener("change", () => {
+  if (originalEl.textContent && originalEl.textContent !== '—') {
+    checkBtn.click(); // Re-analyze with new settings
+  }
+});
+
+highlightWordsCheck.addEventListener("change", () => {
+  if (originalEl.textContent && originalEl.textContent !== '—') {
+    checkBtn.click(); // Re-analyze with new settings
+  }
+});
+
+// Initialize
+document.addEventListener("DOMContentLoaded", () => {
+  updateCounts();
+  updateHistoryDisplay();
+  
+  // Add welcome message
+  setTimeout(() => {
+    showSuccess("🎉 Welcome to Advanced Profanity Filter! Try the sample text or enter your own.");
+  }, 1000);
 });
