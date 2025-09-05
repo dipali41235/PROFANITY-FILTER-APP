@@ -3,34 +3,112 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Profanity Filter App</title>
+  <title>Advanced Profanity Filter App</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="wrapper">
+    <!-- Settings Panel -->
+    <div class="card settings-card">
+      <h2>⚙️ Filter Settings</h2>
+      <div class="settings-grid">
+        <div class="setting-item">
+          <label for="sensitivity">Sensitivity Level:</label>
+          <select id="sensitivity" class="setting-input">
+            <option value="low">Low (Basic words only)</option>
+            <option value="medium" selected>Medium (Common profanity)</option>
+            <option value="high">High (Includes mild language)</option>
+          </select>
+        </div>
+        <div class="setting-item">
+          <label for="replacement">Replacement Style:</label>
+          <select id="replacement" class="setting-input">
+            <option value="asterisk" selected>Asterisks (*****)</option>
+            <option value="hash">Hash marks (#####)</option>
+            <option value="dash">Dashes (-----)</option>
+            <option value="block">Block chars (█████)</option>
+            <option value="clean">[CENSORED]</option>
+          </select>
+        </div>
+        <div class="setting-item checkbox-item">
+          <input type="checkbox" id="preserveLength" checked>
+          <label for="preserveLength">Preserve word length</label>
+        </div>
+        <div class="setting-item checkbox-item">
+          <input type="checkbox" id="highlightWords">
+          <label for="highlightWords">Highlight detected words</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Input Panel -->
     <div class="card">
-      <h1>🛡️ Profanity Filter</h1>
-      <textarea id="textInput" placeholder="Enter your text here to check for profanity..."></textarea>
-      <button id="checkBtn" class="primary">Analyze Text</button>
+      <h1>🛡️ Advanced Profanity Filter</h1>
+      <div class="input-container">
+        <textarea id="textInput" placeholder="Enter your text here to check for profanity..."></textarea>
+        <div class="char-count">
+          <span id="charCount">0</span> characters | <span id="wordCount">0</span> words
+        </div>
+      </div>
+      <div class="button-group">
+        <button id="checkBtn" class="primary">🔍 Analyze Text</button>
+        <button id="clearBtn" class="secondary outline">🗑️ Clear</button>
+        <button id="sampleBtn" class="tertiary outline">📝 Load Sample</button>
+      </div>
       <div class="spinner" id="spinner"></div>
       <div id="errorMessage"></div>
     </div>
 
+    <!-- Results Panel -->
     <div class="card output-card" id="outputCard">
       <h2>📊 Analysis Results</h2>
+      <div class="stats-grid">
+        <div class="stat-item clean">
+          <div class="stat-number" id="cleanWords">0</div>
+          <div class="stat-label">Clean Words</div>
+        </div>
+        <div class="stat-item flagged">
+          <div class="stat-number" id="flaggedWords">0</div>
+          <div class="stat-label">Flagged Words</div>
+        </div>
+        <div class="stat-item severity">
+          <div class="stat-number" id="severityScore">0</div>
+          <div class="stat-label">Risk Score</div>
+        </div>
+      </div>
+
       <div class="result">
-        <strong>Original Text:</strong>
-        <span id="original">—</span>
+        <strong>📝 Original Text:</strong>
+        <div class="text-display" id="original">—</div>
       </div>
       <div class="result">
-        <strong>Filtered Text:</strong>
-        <span id="censored">—</span>
+        <strong>✨ Filtered Text:</strong>
+        <div class="text-display" id="censored">—</div>
       </div>
       <div class="result">
-        <strong>Status:</strong>
+        <strong>🏷️ Status:</strong>
         <span id="hasProfanity">—</span>
       </div>
-      <button id="copyBtn" class="secondary">📋 Copy Filtered Text</button>
+      <div class="result" id="detectedWordsResult" style="display: none;">
+        <strong>🚩 Detected Words:</strong>
+        <div id="detectedWordsList"></div>
+      </div>
+
+      <div class="button-group">
+        <button id="copyBtn" class="secondary">📋 Copy Filtered</button>
+        <button id="copyOriginalBtn" class="tertiary outline">📄 Copy Original</button>
+        <button id="shareBtn" class="accent outline">🔗 Share Results</button>
+      </div>
+    </div>
+
+    <!-- History Panel -->
+    <div class="card history-card" id="historyCard" style="display: none;">
+      <h2>📈 Analysis History</h2>
+      <div class="history-controls">
+        <button id="showHistoryBtn" class="tertiary outline small">📊 Show History</button>
+        <button id="clearHistoryBtn" class="danger outline small">🗑️ Clear History</button>
+      </div>
+      <div id="historyList"></div>
     </div>
   </div>
 
