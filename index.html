@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Profanity Filter App</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="wrapper">
+    <div class="card">
+      <h1>🛡️ Profanity Filter</h1>
+      <textarea id="textInput" placeholder="Enter your text here to check for profanity..."></textarea>
+      <button id="checkBtn" class="primary">Analyze Text</button>
+      <div class="spinner" id="spinner"></div>
+      <div id="errorMessage"></div>
+    </div>
+
+    <div class="card output-card" id="outputCard">
+      <h2>📊 Analysis Results</h2>
+      <div class="result">
+        <strong>Original Text:</strong>
+        <span id="original">—</span>
+      </div>
+      <div class="result">
+        <strong>Filtered Text:</strong>
+        <span id="censored">—</span>
+      </div>
+      <div class="result">
+        <strong>Status:</strong>
+        <span id="hasProfanity">—</span>
+      </div>
+      <button id="copyBtn" class="secondary">📋 Copy Filtered Text</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
