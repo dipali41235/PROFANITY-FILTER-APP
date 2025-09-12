@@ -1,3 +1,4 @@
+// DOM Elements
 const checkBtn = document.getElementById("checkBtn");
 const copyBtn = document.getElementById("copyBtn");
 const copyOriginalBtn = document.getElementById("copyOriginalBtn");
@@ -76,4 +77,14 @@ const profanityDatabase = {
     // Drug references
     'weed', 'pot', 'marijuana', 'drug', 'cocaine', 'heroin', 'meth',
     'crack', 'dope', 'high', 'stoned', 'drunk', 'wasted', 'hammered',
-    'blazed', 'baked', 'lit', 'faded', 'buzzed', 'smashe
+    'blazed', 'baked', 'lit', 'faded', 'buzzed', 'smashed'
+  ]
+};
+
+// Analysis history storage
+let analysisHistory = JSON.parse(localStorage.getItem('profanityFilterHistory') || '[]');
+
+// Sample texts for testing
+const sampleTexts = [
+  "This is a clean sample text with no inappropriate content. It's perfect for testing the filter system.",
+  "What the hell
