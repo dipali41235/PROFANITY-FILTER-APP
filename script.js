@@ -1,4 +1,4 @@
-// DOM Elements
+
 const checkBtn = document.getElementById("checkBtn");
 const copyBtn = document.getElementById("copyBtn");
 const copyOriginalBtn = document.getElementById("copyOriginalBtn");
@@ -88,3 +88,4 @@ let analysisHistory = JSON.parse(localStorage.getItem('profanityFilterHistory') 
 const sampleTexts = [
   "This is a clean sample text with no inappropriate content. It's perfect for testing the filter system.",
   "What the hell
+
