@@ -45,7 +45,7 @@ body {
   font-weight: 300;
 }
 
-/* Cards */
+
 .card {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(20px);
@@ -628,5 +628,6 @@ button.primary:active {
     display: none !important;
   }
 }
+
 
 
