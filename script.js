@@ -17,7 +17,7 @@ const historyCard = document.getElementById("historyCard");
 const spinner = document.getElementById("spinner");
 const errorMessage = document.getElementById("errorMessage");
 
-// Counter elements
+
 const charCount = document.getElementById("charCount");
 const wordCount = document.getElementById("wordCount");
 const cleanWords = document.getElementById("cleanWords");
@@ -88,4 +88,5 @@ let analysisHistory = JSON.parse(localStorage.getItem('profanityFilterHistory') 
 const sampleTexts = [
   "This is a clean sample text with no inappropriate content. It's perfect for testing the filter system.",
   "What the hell
+
 
