@@ -613,7 +613,6 @@ button.primary:active {
   }
 }
 
-/* Print styles */
 @media print {
   body {
     background: white;
@@ -629,4 +628,5 @@ button.primary:active {
     display: none !important;
   }
 }
+
 
