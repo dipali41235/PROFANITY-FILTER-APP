@@ -33,7 +33,7 @@ const replacementSelect = document.getElementById("replacement");
 const preserveLengthCheck = document.getElementById("preserveLength");
 const highlightWordsCheck = document.getElementById("highlightWords");
 
-// Comprehensive profanity word lists by severity
+
 const profanityDatabase = {
   low: [
     // Basic/Mild profanity
@@ -87,6 +87,7 @@ let analysisHistory = JSON.parse(localStorage.getItem('profanityFilterHistory') 
 const sampleTexts = [
   "This is a clean sample text with no inappropriate content. It's perfect for testing the filter system.",
   "What the hell
+
 
 
 
