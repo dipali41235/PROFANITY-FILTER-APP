@@ -389,7 +389,7 @@ button.primary:active {
   white-space: pre-wrap;
 }
 
-/* Detected Words */
+
 .detected-words {
   border-left-color: #f56565;
 }
@@ -628,6 +628,7 @@ button.primary:active {
     display: none !important;
   }
 }
+
 
 
 
