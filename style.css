@@ -547,7 +547,7 @@ button.primary:active {
   font-weight: 600;
 }
 
-/* Responsive Design */
+
 @media (max-width: 768px) {
   .wrapper {
     max-width: 100%;
@@ -628,6 +628,7 @@ button.primary:active {
     display: none !important;
   }
 }
+
 
 
 
