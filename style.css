@@ -97,7 +97,7 @@ body {
   transform: translateY(-1px);
 }
 
-/* Input Section */
+
 textarea {
   width: 100%;
   min-height: 140px;
@@ -628,6 +628,7 @@ button.primary:active {
     display: none !important;
   }
 }
+
 
 
 
