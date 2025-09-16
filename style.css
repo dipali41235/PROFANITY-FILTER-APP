@@ -250,7 +250,7 @@ button.primary:active {
   margin: 0;
 }
 
-/* Results Section */
+
 .output-card {
   display: none;
   animation: fadeInUp 0.5s ease forwards;
@@ -628,6 +628,7 @@ button.primary:active {
     display: none !important;
   }
 }
+
 
 
 
