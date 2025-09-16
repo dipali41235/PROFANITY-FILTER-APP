@@ -271,7 +271,7 @@ button.primary:active {
   }
 }
 
-/* Quick Stats */
+
 .quick-stats {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
@@ -628,6 +628,7 @@ button.primary:active {
     display: none !important;
   }
 }
+
 
 
 
