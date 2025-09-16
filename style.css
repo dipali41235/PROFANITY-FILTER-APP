@@ -142,7 +142,7 @@ textarea::placeholder {
   color: #2d3748;
 }
 
-/* Buttons */
+
 button {
   border: none;
   border-radius: 12px;
@@ -628,6 +628,7 @@ button.primary:active {
     display: none !important;
   }
 }
+
 
 
 
