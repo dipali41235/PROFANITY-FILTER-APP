@@ -538,7 +538,7 @@ button.primary:active {
   margin: 0 2px;
 }
 
-/* Highlight functionality */
+
 .highlighted-profanity {
   background: rgba(245, 101, 101, 0.2);
   padding: 2px 4px;
@@ -627,6 +627,7 @@ button.primary:active {
     display: none !important;
   }
 }
+
 
 
 
