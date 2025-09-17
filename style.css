@@ -482,7 +482,7 @@ button.primary:active {
   white-space: nowrap;
 }
 
-/* Spinner */
+
 .spinner {
   display: none;
   margin: 20px auto;
@@ -627,6 +627,7 @@ button.primary:active {
     display: none !important;
   }
 }
+
 
 
 
