@@ -521,7 +521,7 @@ button.primary:active {
   font-weight: 500;
 }
 
-/* Footer */
+
 .footer {
   text-align: center;
   color: rgba(255, 255, 255, 0.8);
@@ -627,6 +627,7 @@ button.primary:active {
     display: none !important;
   }
 }
+
 
 
 
