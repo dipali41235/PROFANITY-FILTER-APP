@@ -429,7 +429,6 @@ button.primary:active {
   border-color: rgba(153, 27, 27, 0.2);
 }
 
-/* History */
 .history-card {
   display: none;
 }
@@ -628,6 +627,7 @@ button.primary:active {
     display: none !important;
   }
 }
+
 
 
 
