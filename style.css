@@ -509,7 +509,7 @@ button.primary:active {
   100% { transform: rotate(360deg); }
 }
 
-/* Error Message */
+
 .error-message {
   background: rgba(245, 101, 101, 0.1);
   border: 1px solid rgba(245, 101, 101, 0.2);
@@ -627,6 +627,7 @@ button.primary:active {
     display: none !important;
   }
 }
+
 
 
 
