@@ -3,7 +3,7 @@
   margin: 0;
   padding: 0;
 }
-//BO
+//BOD
 body {
   font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -627,6 +627,7 @@ button.primary:active {
     display: none !important;
   }
 }
+
 
 
 
