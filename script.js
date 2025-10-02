@@ -36,7 +36,7 @@ const highlightWordsCheck = document.getElementById("highlightWords");
 
 const profanityDatabase = {
   low: [
-    // Basic/
+    // Basic/Mild 
     'damn', 'hell', 'crap', 'darn', 'piss', 'bloody', 'bugger', 'bollocks'
   ],
   medium: [
@@ -87,6 +87,7 @@ let analysisHistory = JSON.parse(localStorage.getItem('profanityFilterHistory') 
 const sampleTexts = [
   "This is a clean sample text with no inappropriate content. It's perfect for testing the filter system.",
   "What the hell
+
 
 
 
